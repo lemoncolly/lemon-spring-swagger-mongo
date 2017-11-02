@@ -1,5 +1,6 @@
 package hello;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -16,14 +17,23 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @ComponentScan(basePackageClasses = { GreetingController.class })
 public class Application {
 
-	public static void main(String[] args) {
+	@Autowired
+	private CustomerRepository repository;
+	
+	public static void main(String[] args) 
+	{
 		SpringApplication.run(Application.class, args);
 	}
 
 	@Bean
-	public Docket lemonApi() {
+	public Docket lemonApi() 
+	{
 		return new Docket(DocumentationType.SWAGGER_2).select().apis(RequestHandlerSelectors.any())
 				.paths(PathSelectors.any()).build();
-
+	}
+	
+	public void run(String... args) throws Exception 
+	{
+		repository.deleteAll();
 	}
 }

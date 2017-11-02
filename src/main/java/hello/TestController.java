@@ -10,14 +10,14 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 @RestController
-@Api(value="greeting")
-public class GreetingController {
+@Api(value="test")
+public class TestController {
 
     private static final String template = "Hello, %s!";
     private final AtomicLong counter = new AtomicLong();
 
-    @ApiOperation(value = "Some kind of greetingggggggggggg")
-    @RequestMapping(value="/greeting", method= RequestMethod.GET)
+    @ApiOperation(value = "Some kind of test greeting")
+    @RequestMapping(value="/test", method= RequestMethod.GET)
     public Greeting greeting(@RequestParam(value="name", defaultValue="World") String name) {
         return new Greeting(counter.incrementAndGet(),
                             String.format(template, name));
